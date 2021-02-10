@@ -3,7 +3,7 @@ console.log('linked')
 // document.addEventListener('DOM context loaded', () => {
     const gameBoard = document.querySelector('.grid-container');
     // const score = document.querySelector('#score');
-    const result = document.querySelector('#result');
+    const gamePlay = document.querySelector('#game-play');
     const width = 4;
     let boxes = [];
 
@@ -25,6 +25,7 @@ console.log('linked')
         let randomNumber = Math.floor(Math.random() * boxes.length)
         if (boxes[randomNumber].innerHTML == 0){
             boxes[randomNumber].innerHTML = 2;
+            isGameOver()
         } else newTile()
     }
 
@@ -132,6 +133,7 @@ function concatColumn(){
             boxes[i + width].innerHTML = 0
         }
     }
+    win()
 }
 function concatRow(){
     for (let i = 0; i<(width*width)-1; i++){
@@ -141,6 +143,7 @@ function concatRow(){
             boxes[i +1].innerHTML = 0
         }
     }
+    win()
 }
 
 // for up shift
@@ -191,7 +194,27 @@ function arrows(x){
 document.addEventListener('keyup', arrows)
 
 //check for win
+function win(){
+    for (let i = 0; i <boxes.length; i++){
+        if(boxes[i].innerHTML == 2048){
+            gamePlay.innerHTML = "Congratulations! You win!"
+            // how to remove event listener to end game play?
+        }
 
+    }
+}
 
 // check for loss
 
+function isGameOver(){
+    let blankTiles = 0;
+    for (let i = 0; i < boxes.length; i++){
+        if (boxes[i].innerHTML == 0) {
+            blankTiles++
+        }
+    }
+    if (blankTiles == 0){
+        gamePlay.innerHTML = "You have no possible moves. Game over!"
+        //how to remove event listener?
+    }
+}
