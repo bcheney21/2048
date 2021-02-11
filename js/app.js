@@ -1,8 +1,5 @@
-
-console.log('linked')
-// document.addEventListener('DOM context loaded', () => {
 const gameBoard = document.querySelector('.grid-container');
-// const score = document.querySelector('#score');
+const score = document.querySelector('#score');
 const gamePlay = document.querySelector('#game-play');
 const width = 4;
 let boxes = [];
@@ -23,8 +20,49 @@ function newTile() {
     let randomNumber = Math.floor(Math.random() * boxes.length)
     if (boxes[randomNumber].innerHTML == 0){
         boxes[randomNumber].innerHTML = 2;
-        isGameOver()
-    } else newTile()
+        //assigning colors
+        for(let i = 0; i < width*width; i++){
+            if(boxes[i].innerHTML == 0){
+                boxes[i].style.color = 'rgb(255, 0, 0)';
+            }
+            else if(boxes[i].innerHTML == 2){
+                boxes[i].style.color = 'rgb(255, 0, 150)'
+            }
+            else if(boxes[i].innerHTML == 4){
+                boxes[i].style.color = 'rgb(205, 4, 255)'
+            }
+            else if(boxes[i].innerHTML == 8){
+                boxes[i].style.color = 'rgb(119, 0, 255)'
+            }
+            else if(boxes[i].innerHTML == 16){
+                boxes[i].style.color = 'rgb(55, 0, 255)'
+            }
+            else if(boxes[i].innerHTML == 32){
+                boxes[i].style.color = 'rgb(0, 183, 255)'
+            }
+            else if(boxes[i].innerHTML == 64){
+                boxes[i].style.color = 'rgb(0, 248, 186)'
+            }
+            else if(boxes[i].innerHTML == 128){
+                boxes[i].style.color = 'rgb(4, 252, 58)'
+            }
+            else if(boxes[i].innerHTML == 256){
+                boxes[i].style.color = 'rgb(255, 251, 0)'
+            }
+            else if(boxes[i].innerHTML == 512){
+                boxes[i].style.color = 'rgb(255, 196, 0)'
+            }
+            else if(boxes[i].innerHTML == 1024){
+                boxes[i].style.color = 'rgb(255, 123, 0)'
+            }
+            else if(boxes[i].innerHTML == 248){
+                boxes[i].style.color = 'rgb(255, 0, 0)'
+            }
+        }
+        isGameOver();
+    } else {
+        newTile();
+    }
 }
 
 //to move up
@@ -34,12 +72,12 @@ function shiftUp() {
         let two = boxes[i + width].innerHTML;
         let three = boxes[i + (width * 2)].innerHTML;
         let four = boxes[i + (width * 3)].innerHTML;
-        let column = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+        let column = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)];
         
-        let filterColumn = column.filter(num => num)
-        let missing = 4 - filterColumn.length
+        let filterColumn = column.filter(num => num);
+        let missing = 4 - filterColumn.length;
         let empty = Array(missing).fill(0);
-        let newColumn = empty.concat(empty)
+        let newColumn = empty.concat(empty);
         
         boxes[i].innerHtml = newColumn[0];
         boxes[i + width].innerHtml = newColumn[1];
@@ -55,12 +93,12 @@ function shiftDown() {
         let two = boxes[i + width].innerHTML;
         let three = boxes[i + (width * 2)].innerHTML;
         let four = boxes[i + (width * 3)].innerHTML;
-        let column = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+        let column = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)];
         
-        let filterColumn = column.filter(num => num)
-        let missing = 4 - filterColumn.length
+        let filterColumn = column.filter(num => num);
+        let missing = 4 - filterColumn.length;
         let empty = Array(missing).fill(0);
-        let newColumn = empty.concat(filterColumn)
+        let newColumn = empty.concat(filterColumn);
         
         boxes[i].innerHtml = newColumn[0];
         boxes[i + width].innerHtml = newColumn[1];
@@ -79,14 +117,10 @@ function rightShift() {
             let four = boxes[i+3].innerHTML;
             let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
 
-            // console.log(row);
             let filteredRow = row.filter(num => num);
-            // console.log(filteredRow);
             let missing = 4 - filteredRow.length;
             let empty = Array(missing).fill(0);
-            // console.log(empty);
             let newRow = empty.concat(filteredRow);
-            // console.log(newRow);
 
             boxes[i].innerHTML = newRow[0];
             boxes[i + 1].innerHTML = newRow[1];
@@ -106,14 +140,10 @@ function leftShift() {
             let four = boxes[i+3].innerHTML;
             let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
 
-            // console.log(row);
             let filteredRow = row.filter(num => num);
-            // console.log(filteredRow);
             let missing = 4 - filteredRow.length;
             let empty = Array(missing).fill(0);
-            // console.log(empty);
             let newRow = filteredRow.concat(empty);
-            // console.log(newRow);
 
             boxes[i].innerHTML = newRow[0];
             boxes[i + 1].innerHTML = newRow[1];
@@ -193,12 +223,17 @@ function arrows(x){
     }
 }
 
-// //color coding tiles
-// function colorCode(){
-//     for(let i = 0; i < width*width; i++){
-//         if(boxes[i].innerHTML == 2)
-//     }
-// }
+//color coding tiles
+function colorCode(){
+    for(let i = 0; i < width*width; i++){
+        let box = boxes[i];
+        if(box.innerHTML === 2){
+            document.querySelector('div').style.color = 'pink'
+        }
+            // document.getElementById("div").style.color = "red";
+        }
+    }
+
 //check for win
 function win(){
     for (let i = 0; i <boxes.length; i++){
@@ -212,7 +247,6 @@ function win(){
 }
 
 // check for loss
-
 function isGameOver(){
     let blankTiles = 0;
     for (let i = 0; i < boxes.length; i++){
@@ -224,4 +258,9 @@ function isGameOver(){
         gamePlay.innerHTML = "You have no possible moves. Game over!"
         document.removeEventListener('keyup', arrows)
     }
+}
+
+//reset board 
+function resetBoard(){
+    
 }
