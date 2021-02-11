@@ -1,129 +1,127 @@
 
 console.log('linked')
 // document.addEventListener('DOM context loaded', () => {
-    const gameBoard = document.querySelector('.grid-container');
-    // const score = document.querySelector('#score');
-    const gamePlay = document.querySelector('#game-play');
-    const width = 4;
-    let boxes = [];
+const gameBoard = document.querySelector('.grid-container');
+// const score = document.querySelector('#score');
+const gamePlay = document.querySelector('#game-play');
+const width = 4;
+let boxes = [];
 
-    // creating the board
-    function makeBoard() {
-        for (let i = 0; i < width*width; i++){
-            let box = document.createElement('div');
-            box.innerHTML = 0;
-            gameBoard.appendChild(box);
-            boxes.push(box);
-        }
-        newTile()
-        newTile()
+// creating the board
+function makeBoard() {
+    for (let i = 0; i < width*width; i++){
+        let box = document.createElement('div');
+        gameBoard.appendChild(box);
+        boxes.push(box);
     }
-    makeBoard();
+    newTile();
+}
+makeBoard();
 
-    //generating random number
-    function newTile() {
-        let randomNumber = Math.floor(Math.random() * boxes.length)
-        if (boxes[randomNumber].innerHTML == 0){
-            boxes[randomNumber].innerHTML = 2;
-            isGameOver()
-        } else newTile()
+//generating random number
+function newTile() {
+    let randomNumber = Math.floor(Math.random() * boxes.length)
+    if (boxes[randomNumber].innerHTML == 0){
+        boxes[randomNumber].innerHTML = 2;
+        isGameOver()
+    } else newTile()
+}
+
+//to move up
+function shiftUp() {
+    for (let i =0; i < width; i++){
+        let one = boxes[i].innerHTML;
+        let two = boxes[i + width].innerHTML;
+        let three = boxes[i + (width * 2)].innerHTML;
+        let four = boxes[i + (width * 3)].innerHTML;
+        let column = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+        
+        let filterColumn = column.filter(num => num)
+        let missing = 4 - filterColumn.length
+        let empty = Array(missing).fill(0);
+        let newColumn = empty.concat(empty)
+        
+        boxes[i].innerHtml = newColumn[0];
+        boxes[i + width].innerHtml = newColumn[1];
+        boxes[i + (width * 2)].innerHtml = newColumn[2];
+        boxes[i + (width * 3)].innerHtml = newColumn[3];
     }
+}
 
-    //to move up
-    function shiftUp() {
-        for (let i =0; i < width; i++){
+// to move down
+function shiftDown() {
+    for (let i =0; i < width; i++){
+        let one = boxes[i].innerHTML;
+        let two = boxes[i + width].innerHTML;
+        let three = boxes[i + (width * 2)].innerHTML;
+        let four = boxes[i + (width * 3)].innerHTML;
+        let column = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+        
+        let filterColumn = column.filter(num => num)
+        let missing = 4 - filterColumn.length
+        let empty = Array(missing).fill(0);
+        let newColumn = empty.concat(filterColumn)
+        
+        boxes[i].innerHtml = newColumn[0];
+        boxes[i + width].innerHtml = newColumn[1];
+        boxes[i + (width * 2)].innerHtml = newColumn[2];
+        boxes[i + (width * 3)].innerHtml = newColumn[3];
+    }
+}
+
+//to move right
+function rightShift() {
+    for (let i = 0; i < width*width; i++) {
+        if(i % 4 == 0){
             let one = boxes[i].innerHTML;
-            let two = boxes[i + width].innerHTML;
-            let three = boxes[i + (width * 2)].innerHTML;
-            let four = boxes[i + (width * 3)].innerHTML;
-            let column = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
-            
-            let filterColumn = column.filter(num => num)
-            let missing = 4 - filterColumn.length
+            let two = boxes[i+1].innerHTML;
+            let three = boxes[i+2].innerHTML;
+            let four = boxes[i+3].innerHTML;
+            let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+
+            // console.log(row);
+            let filteredRow = row.filter(num => num);
+            // console.log(filteredRow);
+            let missing = 4 - filteredRow.length;
             let empty = Array(missing).fill(0);
-            let newColumn = empty.concat(empty)
-            
-            boxes[i].innerHtml = newColumn[0];
-            boxes[i + width].innerHtml = newColumn[1];
-            boxes[i + (width * 2)].innerHtml = newColumn[2];
-            boxes[i + (width * 3)].innerHtml = newColumn[3];
+            // console.log(empty);
+            let newRow = empty.concat(filteredRow);
+            // console.log(newRow);
+
+            boxes[i].innerHTML = newRow[0];
+            boxes[i + 1].innerHTML = newRow[1];
+            boxes[i + 2].innerHTML = newRow[2];
+            boxes[i + 3].innerHTML = newRow[3];
         }
     }
-
-    // to move down
-    function shiftDown() {
-        for (let i =0; i < width; i++){
-            let one = boxes[i].innerHTML;
-            let two = boxes[i + width].innerHTML;
-            let three = boxes[i + (width * 2)].innerHTML;
-            let four = boxes[i + (width * 3)].innerHTML;
-            let column = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
-            
-            let filterColumn = column.filter(num => num)
-            let missing = 4 - filterColumn.length
-            let empty = Array(missing).fill(0);
-            let newColumn = empty.concat(filterColumn)
-            
-            boxes[i].innerHtml = newColumn[0];
-            boxes[i + width].innerHtml = newColumn[1];
-            boxes[i + (width * 2)].innerHtml = newColumn[2];
-            boxes[i + (width * 3)].innerHtml = newColumn[3];
-        }
-    }
-    
-    //to move right
-    function rightShift() {
-        for (let i = 0; i < width*width; i++) {
-            if(i % 4 == 0){
-                let one = boxes[i].innerHTML;
-                let two = boxes[i+1].innerHTML;
-                let three = boxes[i+2].innerHTML;
-                let four = boxes[i+3].innerHTML;
-                let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
-
-                // console.log(row);
-                let filteredRow = row.filter(num => num);
-                // console.log(filteredRow);
-                let missing = 4 - filteredRow.length;
-                let empty = Array(missing).fill(0);
-                // console.log(empty);
-                let newRow = empty.concat(filteredRow);
-                // console.log(newRow);
-
-                boxes[i].innerHTML = newRow[0];
-                boxes[i + 1].innerHTML = newRow[1];
-                boxes[i + 2].innerHTML = newRow[2];
-                boxes[i + 3].innerHTML = newRow[3];
-            }
-        }
-    }
+}
 
 // to move left
-    function leftShift() {
-        for (let i = 0; i < width*width; i++) {
-            if(i % 4 == 0){
-                let one = boxes[i].innerHTML;
-                let two = boxes[i+1].innerHTML;
-                let three = boxes[i+2].innerHTML;
-                let four = boxes[i+3].innerHTML;
-                let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+function leftShift() {
+    for (let i = 0; i < width*width; i++) {
+        if(i % 4 == 0){
+            let one = boxes[i].innerHTML;
+            let two = boxes[i+1].innerHTML;
+            let three = boxes[i+2].innerHTML;
+            let four = boxes[i+3].innerHTML;
+            let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
 
-                // console.log(row);
-                let filteredRow = row.filter(num => num);
-                // console.log(filteredRow);
-                let missing = 4 - filteredRow.length;
-                let empty = Array(missing).fill(0);
-                // console.log(empty);
-                let newRow = filteredRow.concat(empty);
-                // console.log(newRow);
+            // console.log(row);
+            let filteredRow = row.filter(num => num);
+            // console.log(filteredRow);
+            let missing = 4 - filteredRow.length;
+            let empty = Array(missing).fill(0);
+            // console.log(empty);
+            let newRow = filteredRow.concat(empty);
+            // console.log(newRow);
 
-                boxes[i].innerHTML = newRow[0];
-                boxes[i + 1].innerHTML = newRow[1];
-                boxes[i + 2].innerHTML = newRow[2];
-                boxes[i + 3].innerHTML = newRow[3];
-            }
+            boxes[i].innerHTML = newRow[0];
+            boxes[i + 1].innerHTML = newRow[1];
+            boxes[i + 2].innerHTML = newRow[2];
+            boxes[i + 3].innerHTML = newRow[3];
         }
     }
+}
 
 function concatColumn(){
     for (let i = 0; i< 12; i++){
@@ -179,6 +177,9 @@ function arrowLeft(){
     newTile();
 }
 
+//adding the event listener
+document.addEventListener('keyup', arrows) 
+
 // left = 37, right = 39, up = 38, down = 40
 function arrows(x){
     if(x.keyCode === 39){ 
@@ -191,13 +192,19 @@ function arrows(x){
         arrowDown()
     }
 }
-document.addEventListener('keyup', arrows)
 
+// //color coding tiles
+// function colorCode(){
+//     for(let i = 0; i < width*width; i++){
+//         if(boxes[i].innerHTML == 2)
+//     }
+// }
 //check for win
 function win(){
     for (let i = 0; i <boxes.length; i++){
         if(boxes[i].innerHTML == 2048){
             gamePlay.innerHTML = "Congratulations! You win!"
+            document.removeEventListener('keyup', arrows)
             // how to remove event listener to end game play?
         }
 
@@ -215,6 +222,6 @@ function isGameOver(){
     }
     if (blankTiles == 0){
         gamePlay.innerHTML = "You have no possible moves. Game over!"
-        //how to remove event listener?
+        document.removeEventListener('keyup', arrows)
     }
 }
