@@ -260,7 +260,3 @@ function isGameOver(){
     }
 }
 
-//reset board 
-function resetBoard(){
-    
-}
