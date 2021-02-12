@@ -1,26 +1,17 @@
 const gameBoard = document.querySelector('.grid-container');
-const score = document.querySelector('#score');
+let score = document.querySelector('#score');
 const gamePlay = document.querySelector('#game-play');
 const width = 4;
 let boxes = [];
 
-// creating the board
-function makeBoard() {
-    for (let i = 0; i < width*width; i++){
-        let box = document.createElement('div');
-        gameBoard.appendChild(box);
-        boxes.push(box);
-    }
-    newTile();
-}
-makeBoard();
-
-//generating random number
+// making tiles
 function newTile() {
-    let randomNumber = Math.floor(Math.random() * boxes.length)
-    if (boxes[randomNumber].innerHTML == 0){
-        boxes[randomNumber].innerHTML = 2;
-        //assigning colors
+    // randomly generating which tile
+    let ranNum = Math.floor(Math.random() * boxes.length)
+    //setting the value of the new tile
+    if (boxes[ranNum].innerHTML == 0){
+        boxes[ranNum].innerHTML = 2;
+        
         for(let i = 0; i < width*width; i++){
             if(boxes[i].innerHTML == 0){
                 boxes[i].style.color = 'rgb(255, 0, 0)';
@@ -64,6 +55,21 @@ function newTile() {
         newTile();
     }
 }
+
+// creating the board
+function makeBoard() {
+    for (let i = 0; i < width*width; i++){
+        let box = document.createElement('div');
+        box.innerHTML = 0;
+        gameBoard.appendChild(box);
+        boxes.push(box);
+    }
+    newTile();
+    newTile()
+}
+makeBoard();
+
+
 
 //to move up
 function shiftUp() {
@@ -154,21 +160,23 @@ function leftShift() {
 }
 
 function concatColumn(){
-    for (let i = 0; i< 12; i++){
+    for (let i = 0; i < 12; i++){
         if (boxes[i].innerHTML === boxes[i + width].innerHTML) {
-            let combined = parseInt(boxes[i].innerHTML) + parseInt(boxes[i + width].innerHTML)
-            boxes[i].innerHTML = combined
+            let addToScore = parseInt(boxes[i].innerHTML) + parseInt(boxes[i + width].innerHTML)
+            boxes[i].innerHTML = addToScore
             boxes[i + width].innerHTML = 0
+            score = score + addToScore;
         }
     }
     win()
 }
 function concatRow(){
-    for (let i = 0; i<(width*width)-1; i++){
-        if (boxes[i].innerHTML === boxes[i+1].innerHTML) {
-            let combined = parseInt(boxes[i].innerHTML) + parseInt(boxes[i+1].innerHTML)
-            boxes[i].innerHTML = combined
+    for (let i = 0; i< 15; i++){
+        if (boxes[i].innerHTML === boxes[i+1].innerHTML){
+            let addToScore = parseInt(boxes[i].innerHTML) + parseInt(boxes[i+1].innerHTML)
+            boxes[i].innerHTML = addToScore
             boxes[i +1].innerHTML = 0
+            score = score + addToScore
         }
     }
     win()
