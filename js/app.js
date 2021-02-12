@@ -1,8 +1,12 @@
+// constants
 const gameBoard = document.querySelector('.grid-container');
-let score = document.querySelector('#score');
+const showScore = document.querySelector('#score');
 const gamePlay = document.querySelector('#game-play');
 const width = 4;
+
+// game logic variables and state
 let boxes = [];
+let score = 0;
 
 // making tiles
 function newTile() {
@@ -11,40 +15,43 @@ function newTile() {
     //setting the value of the new tile
     if (boxes[ranNum].innerHTML == 0){
         boxes[ranNum].innerHTML = 2;
-        
+        // setting the colors - is there a better place to do this?
         for(let i = 0; i < width*width; i++){
             if(boxes[i].innerHTML == 0){
                 boxes[i].style.color = 'rgb(255, 0, 0)';
             }
             else if(boxes[i].innerHTML == 2){
-                boxes[i].style.color = 'rgb(255, 0, 150)'
+                boxes[i].style.color = 'rgb(255, 0, 150)';
             }
             else if(boxes[i].innerHTML == 4){
-                boxes[i].style.color = 'rgb(205, 4, 255)'
+                boxes[i].style.color = 'rgb(205, 4, 255)';
             }
             else if(boxes[i].innerHTML == 8){
-                boxes[i].style.color = 'rgb(119, 0, 255)'
+                boxes[i].style.color = 'rgb(119, 0, 255)';
             }
             else if(boxes[i].innerHTML == 16){
-                boxes[i].style.color = 'rgb(55, 0, 255)'
+                boxes[i].style.color = 'rgb(55, 0, 255)';
             }
             else if(boxes[i].innerHTML == 32){
-                boxes[i].style.color = 'rgb(0, 183, 255)'
+                boxes[i].style.color = 'rgb(0, 183, 255)';
             }
             else if(boxes[i].innerHTML == 64){
-                boxes[i].style.color = 'rgb(0, 248, 186)'
+                boxes[i].style.color = 'rgb(0, 248, 186)';
             }
             else if(boxes[i].innerHTML == 128){
-                boxes[i].style.color = 'rgb(4, 252, 58)'
+                boxes[i].style.color = 'rgb(4, 252, 58)';
             }
             else if(boxes[i].innerHTML == 256){
-                boxes[i].style.color = 'rgb(255, 251, 0)'
+                boxes[i].style.color = 'rgb(255, 251, 0)';
+                gamePlay.innerHTML = "Congratulations! You have reached the 256 tile!";
             }
             else if(boxes[i].innerHTML == 512){
-                boxes[i].style.color = 'rgb(255, 196, 0)'
+                boxes[i].style.color = 'rgb(255, 196, 0)';
+                gamePlay.innerHTML = "Congratulations! You have reached the 512 tile!";
             }
             else if(boxes[i].innerHTML == 1024){
-                boxes[i].style.color = 'rgb(255, 123, 0)'
+                boxes[i].style.color = 'rgb(255, 123, 0)';
+                gamePlay.innerHTML = "Congratulations! You have reached the 1024 tile!";
             }
             else if(boxes[i].innerHTML == 248){
                 boxes[i].style.color = 'rgb(255, 0, 0)'
@@ -56,6 +63,14 @@ function newTile() {
     }
 }
 
+// function congratsMessage(){
+//     for(let i = 0; i < width*width; i++){
+//         if(boxes[i].innerHTML == 4){
+//             gamePlay.innerHTML = "Congratulations! You have reached the 256 tile!";
+//         }
+//     }
+// }
+
 // creating the board
 function makeBoard() {
     for (let i = 0; i < width*width; i++){
@@ -65,12 +80,11 @@ function makeBoard() {
         boxes.push(box);
     }
     newTile();
-    newTile()
+    newTile();
 }
 makeBoard();
 
-
-
+// functions for logic behind an arrow shift
 //to move up
 function shiftUp() {
     for (let i =0; i < width; i++){
@@ -163,11 +177,14 @@ function concatColumn(){
     for (let i = 0; i < 12; i++){
         if (boxes[i].innerHTML === boxes[i + width].innerHTML) {
             let addToScore = parseInt(boxes[i].innerHTML) + parseInt(boxes[i + width].innerHTML)
-            boxes[i].innerHTML = addToScore
-            boxes[i + width].innerHTML = 0
+            boxes[i].innerHTML = addToScore;
+            boxes[i + width].innerHTML = 0;
             score = score + addToScore;
+            showScore.innerHTML = score;
+
         }
     }
+ 
     win()
 }
 function concatRow(){
@@ -177,6 +194,7 @@ function concatRow(){
             boxes[i].innerHTML = addToScore
             boxes[i +1].innerHTML = 0
             score = score + addToScore
+            showScore.innerHTML = score;
         }
     }
     win()
@@ -191,7 +209,6 @@ function arrowUp(){
 }
 
 // for down shift
-
 function arrowDown(){
     shiftDown()
     concatColumn()
@@ -230,17 +247,6 @@ function arrows(x){
         arrowDown()
     }
 }
-
-//color coding tiles
-function colorCode(){
-    for(let i = 0; i < width*width; i++){
-        let box = boxes[i];
-        if(box.innerHTML === 2){
-            document.querySelector('div').style.color = 'pink'
-        }
-            // document.getElementById("div").style.color = "red";
-        }
-    }
 
 //check for win
 function win(){
