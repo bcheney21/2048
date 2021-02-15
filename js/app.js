@@ -63,18 +63,10 @@ function newTile() {
     }
 }
 
-// function congratsMessage(){
-//     for(let i = 0; i < width*width; i++){
-//         if(boxes[i].innerHTML == 4){
-//             gamePlay.innerHTML = "Congratulations! You have reached the 256 tile!";
-//         }
-//     }
-// }
-
 // creating the board
 function makeBoard() {
     for (let i = 0; i < width*width; i++){
-        let box = document.createElement('div');
+        var box = document.createElement('div');
         box.innerHTML = 0;
         gameBoard.appendChild(box);
         boxes.push(box);
@@ -272,5 +264,28 @@ function isGameOver(){
         gamePlay.innerHTML = "You have no possible moves. Game over!"
         document.removeEventListener('keyup', arrows)
     }
+}
+
+// document.querySelector("#reset").addEventListener('click', function(){
+//     let boxes = [];
+//     for (let i = 0; i < width*width; i++){
+//         var box = document.querySelector('div');
+//         box.innerHTML = 0;
+//         gameBoard.appendChild(box);
+//         boxes.push(box);
+//     }
+//     let score = 0;
+//     newTile();
+//     newTile();
+// })
+
+document.querySelector('#reset').onclick = function() {
+    boxes = [];
+    score = 0;
+    // for (let i = 0; i < width*width; i++){
+    //     var box = document.querySelector('div');
+    //     box.remove()
+    // }
+    makeBoard()
 }
 

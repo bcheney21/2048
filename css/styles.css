@@ -8,27 +8,24 @@ body {
 h1, p{
     text-align: center;
     font-family: 'Concert One', cursive;
-    font-weight: bold;
-    
+    font-weight: bold;   
 }
+
 h1{
     font-size: 60px;
     color:rgb(255, 0, 150);
     margin-bottom: -2px;
 }
 
-p{
+p {
     color:rgb(255, 0, 150);
     font-size: 35px;
 }
-#score{
+#score, .score-display{
     color:rgb(255, 0, 150);
     font-family: 'Concert One', cursive;
-}
-
-.score-display{
-    color: rgb(255, 0, 150);
-    font-family: 'Concert One', cursive;
+    text-align: center;
+    margin-bottom: 5px;
 }
 .grid-container{
     display: flex;
