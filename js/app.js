@@ -279,13 +279,13 @@ function isGameOver(){
 //     newTile();
 // })
 
-document.querySelector('#reset').onclick = function() {
-    boxes = [];
-    score = 0;
-    // for (let i = 0; i < width*width; i++){
-    //     var box = document.querySelector('div');
-    //     box.remove()
-    // }
-    makeBoard()
-}
+// document.querySelector('#reset').onclick = function() {
+//     boxes = [];
+//     score = 0;
+//     // for (let i = 0; i < width*width; i++){
+//     //     var box = document.querySelector('div');
+//     //     box.remove()
+//     // }
+// //     makeBoard()
+// }
 
