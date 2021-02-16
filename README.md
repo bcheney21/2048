@@ -1,6 +1,6 @@
 # 2048
 ## Overview: 
-### This project is my version of the game 2048. I am building this game for my first project in my General Assembly Software Engineering course. I chose this game because the challenge of figuring out how the tiles move appealed to me. I felt that it was the perfect project to help me strengthen my javascript, HTML, amd CSS skills. 
+### This project is my version of the game 2048. I am building this game for my first project in my General Assembly Software Engineering course. I chose this game because the challenge of figuring out how the tiles move appealed to me. I felt that it was the perfect project to help me strengthen my javascript, HTML, amd CSS skills. To play the game, simply go to https://bcheney21.github.io/.
 ## Game Rules: 
 ### 2048 is set up on a 4x4 grid. The player begins with 2 tiles that are valued at 2 or 4 placed randomly on the board. From there, the player uses the up, down, left, and right arrow keys to shift the tiles on the board. When the tiles are shifted, they go as far in the direction of the shift that they can. When two tiles with the same value collide, they combine and become the sum of the two values. When the tiles are shifted, new tiles valued at either 2 or four are generated. Game play continues as the board gets more crowded and tiles are combined to sum larger numbers with the goal of reaching a tile valued at 2,048. If the board becomes too crowded and there are no more shifts that will lead to tile combinations, the player loses. 
 ## Wireframes:
