@@ -2,7 +2,7 @@
 ## Overview: 
 ### This project is my version of the game 2048. I am building this game for my first project in my General Assembly Software Engineering course. I chose this game because the challenge of figuring out how the tiles move appealed to me. I felt that it was the perfect project to help me strengthen my javascript, HTML, amd CSS skills. To play the game, simply go to https://bcheney21.github.io/.
 ## Game Rules: 
-### 2048 is set up on a 4x4 grid. The player begins with 2 tiles that are valued at 2 placed randomly on the board. From there, the player uses the up, down, left, and right arrow keys to shift the tiles on the board. When the tiles are shifted, they go as far in the direction of the shift that they can. When two tiles with the same value collide, they combine and become the sum of the two values. When the tiles are shifted, new tiles valued at either 2 or four are generated. Game play continues as the board gets more crowded and tiles are combined to sum larger numbers with the goal of reaching a tile valued at 2,048. If the board becomes too crowded and there are no more shifts that will lead to tile combinations, the player loses. 
+### 2048 is set up on a 4x4 grid. It is a single player game where you are essentially playing against the computer as it attempts to fill up the board. The player begins with 2 tiles that are valued at 2 placed randomly on the board. From there, the player uses the up, down, left, and right arrow keys to shift the tiles on the board. When the tiles are shifted, they go as far in the direction of the shift that they can. When two tiles with the same value collide, they combine and become the sum of the two values. When the tiles are shifted, new tiles valued at 2 are generated. Game play continues as the board gets more crowded and tiles are combined to sum larger numbers with the goal of reaching a tile valued at 2,048. If the board becomes too crowded and there are no more shifts that will lead to tile combinations, the player loses. 
 ## Wireframes:
 ![Wireframe image 1](2048-1.png) Game play begins and two tiles are randomly generated.
 ![Wireframe image 2](2048-2.png) 
@@ -14,7 +14,7 @@
 ## MVP Checklist: 
 * Game must include numbered tiles that can be shifted using the arrow keys.
 * Game must have the functionality to recognize when two tiles of the same value collide and must be summed to create a new tile.
-* Game must randomly generate new tiles with the value of 2 upon each player move.
+* Game must randomly generate a new tile with the value of 2 upon each player move.
 * Game must recognize when the player attains a tile valued at 2,048 and wins.
 * Game must recognize when the board is full with no possible shifts and the player loses. 
 ## Stretch Goals: 
