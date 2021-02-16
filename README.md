@@ -21,4 +21,52 @@
 * Animated transitions as the tiles move. 
 * Score board to track players progress.
 * Color coded tiles for each of the different values that change colors when the value of the tile is changed.
+## Technologies Used:
+* This game was built using HTML, CSS, and Javascript. It relies on event listeners and functions.
+## Code Snippets:
+* The brunt of this game is found in the Javascript functions defining what happens when the arrows are clicked. For each arrow, there is a function defining how the board should shift that calls on another function telling the game how to move either rows or columns. Both of these functions are then called in another function that is linked to the event listener. This code is essentially the same for each arrow key with slight adjustments to the game logic. 
+### Here is an example of the function for combining rows:
+### function concatRow(){
+### for (let i = 0; i< 15; i++){
+###     if (boxes[i].innerHTML === boxes[i+1].innerHTML){
+###         let addToScore = parseInt(boxes[i].innerHTML) + parseInt(boxes[i+1].innerHTML)
+###         boxes[i].innerHTML = addToScore
+###         boxes[i +1].innerHTML = 0
+###         score = score + addToScore
+###         showScore.innerHTML = score;
+###         }
+###     }
+###     win()
+###    }
+### Here is an example of the code used to define what happens when the board is shifted right:
+### function rightShift() {
+### for (let i = 0; i < width*width; i++) {
+### if(i % 4 == 0){
+### let one = boxes[i].innerHTML;
+### let two = boxes[i+1].innerHTML;
+### let three = boxes[i+2].innerHTML;
+### let four = boxes[i+3].innerHTML;
+### let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+### let filteredRow = row.filter(num => num);
+### let empty = Array(missing).fill(0);
+### let newRow = empty.concat(filteredRow);
+
+### boxes[i].innerHTML = newRow[0];
+### boxes[i + 1].innerHTML = newRow[1];
+### boxes[i + 2].innerHTML = newRow[2];
+### boxes[i + 3].innerHTML = newRow[3];
+### }
+### }
+### }
+### Finally, here is how the two functions are combined to make a move:
+### function arrowRight(){
+### rightShift();
+### concatRow();
+### rightShift();
+### newTile();
+### }
+## Sources:
+* Stack Overflow
+* W3Schools
+* 2048 Codepen (https://codepen.io/camsong/pen/wcKrg)
 
