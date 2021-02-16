@@ -21,6 +21,8 @@
 * Animated transitions as the tiles move. 
 * Score board to track players progress.
 * Color coded tiles for each of the different values that change colors when the value of the tile is changed.
+* Sound effects when tiles collide.
+* Background music.
 ## Technologies Used:
 * This game was built using HTML, CSS, and Javascript. It relies on event listeners and functions.
 ## Code Snippets:
